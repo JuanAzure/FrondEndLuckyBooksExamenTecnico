@@ -52,7 +52,7 @@ export class LibroListComponent implements OnInit, OnDestroy {
   }
 
   Lista() {
-    const url = environment.BASE_URL + '/Libro';
+    const url = environment.BASE_URL + '/Libro/getAllLibro';
     this.subRef$ = this.dataService.get<Libro[]>(url)
       .subscribe(res => {
         this.cargando = false;
@@ -86,7 +86,7 @@ export class LibroListComponent implements OnInit, OnDestroy {
 
   BorrarArticulo(libro: Libro) {
     this.cargando = true;
-    const url = environment.BASE_URL + '/Libro/'+ libro.codigolibro
+    const url = environment.BASE_URL + '/Libro/deleteLibro/'+ libro.codigolibro
     this.subRef$ = this.dataService.delete<Libro>(url)
       .subscribe(res => {
         

@@ -34,10 +34,10 @@ export class LibroAddComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<LibroAddComponent>,
     private errorHandler: ErrorHandlerService
   ) {
-    this.formAgregar = formBuilder.group({            
-      descripcion: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(60)]),      
+    this.formAgregar = formBuilder.group({
+      descripcion: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(60)]),
       asignatura: new FormControl('', [Validators.required]),
-      stock: new FormControl([Validators.required, Validators.min(1), Validators.max(500)]),            
+      stock: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(500)]),
     });
 
   }
@@ -51,13 +51,13 @@ export class LibroAddComponent implements OnInit, OnDestroy {
 
   AgregarLibro() {
     this.cargando = true;
-    const libroForCreation: LibroForCreation = {        
-     descripcion: this.formAgregar.value.descripcion,
-     asignatura: this.formAgregar.value.asignatura,      
-     stock: this.formAgregar.value.stock,
+    const libroForCreation: LibroForCreation = {
+      descripcion: this.formAgregar.value.descripcion,
+      asignatura: this.formAgregar.value.asignatura,
+      stock: this.formAgregar.value.stock,
     };
 
-    const url = environment.BASE_URL + '/Libro';
+    const url = environment.BASE_URL + '/Libro/createLibro';
     this.subRef$ = this.dataService.post<LibroForCreation>(url, libroForCreation)
       .subscribe(res => {
         this.cargando = false;
@@ -70,13 +70,13 @@ export class LibroAddComponent implements OnInit, OnDestroy {
             this.errorHandler.handleError(err);
             this.dialogRef.close()
             return;
-          }          
+          }
           this.notificationService.warn(err.error);
         });
   }
 
   ListaAsignatura() {
-    const url = environment.BASE_URL + '/Asignatura';
+    const url = environment.BASE_URL + '/Asignatura/GetAllAsignatura';
     this.subRef$ = this.dataService.get<Asignatura[]>(url)
       .subscribe(res => {
         this.listadoAsignatura = res.body;

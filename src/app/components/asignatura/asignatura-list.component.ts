@@ -44,7 +44,7 @@ export class AsignaturaListComponent implements OnInit, OnDestroy {
   }
 
   ListaAsignaturas() {
-    const url = environment.BASE_URL + '/Asignatura';
+    const url = environment.BASE_URL + '/Asignatura/GetAllAsignatura';
     this.subRef$ = this.dataService.get<Asignatura[]>(url)
       .subscribe(res => {
         this.cargando = false;
@@ -66,7 +66,7 @@ export class AsignaturaListComponent implements OnInit, OnDestroy {
       position: { top: "10px" },
       data: {
         id: asig.codigoAsignatura,
-        titulo: '¿Desea eliminar la Asignatura:  "' + asig.codigoAsignatura + ' ' + asig.codigoAsignatura + '"?',
+        titulo: '¿Desea eliminar la Asignatura:  "' + asig.codigoAsignatura + ' ' + asig.descripcion + '"?',
         dato: 'Si continua no podra recuperar los cambios.'
       }
     });
@@ -79,7 +79,7 @@ export class AsignaturaListComponent implements OnInit, OnDestroy {
 
   BorrarAsignatura(asig: Asignatura) {
     this.cargando = true;
-    const url = environment.BASE_URL + '/Asignatura/' + asig.codigoAsignatura
+    const url = environment.BASE_URL + '/Asignatura/deleteAsignatura/' + asig.codigoAsignatura
     this.subRef$ = this.dataService.delete<Asignatura>(url)
       .subscribe(res => {
         const index: number = this.asignaturas.data.findIndex(d => d === asig);

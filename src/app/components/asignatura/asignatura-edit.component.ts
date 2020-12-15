@@ -39,7 +39,7 @@ export class AsignaturaEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargando = true;
     this.codigoAsignatura = this.data.codigoAsignatura
-    const url = environment.BASE_URL + '/Asignatura/' + this.codigoAsignatura;
+    const url = environment.BASE_URL + '/Asignatura/getByIdAsignatura/' + this.codigoAsignatura;
     this.subRef$ = this.dataService.get<Asignatura>(url)
       .subscribe(res => {
         this.cargando = false;
@@ -63,7 +63,7 @@ export class AsignaturaEditComponent implements OnInit, OnDestroy {
       condicion: this.formEditar.value.condicion
     };
     this.cargando = true;
-    const url = environment.BASE_URL + '/Asignatura'
+    const url = environment.BASE_URL + '/Asignatura/updateAsignatura'
     this.subRef$ = this.dataService.put<AsignaturaForUpdate>(url, asignaturaForUpdate)
       .subscribe(res => {
         this.cargando = false;

@@ -18,7 +18,7 @@
                 <mat-form-field>
                     <input matInput placeholder="Descripcion" formControlName="descripcion">
                     <mat-hint align="end">No más de 60 caracteres.</mat-hint>
-                    <mat-error *ngIf="hasError('descripcion', 'required')">Ingrese el Numero</mat-error>
+                    <mat-error *ngIf="hasError('descripcion', 'required')">Ingrese descripcion</mat-error>
                     <mat-error *ngIf="hasError('descripcion', 'minlength')">Minimo 5 caracteres</mat-error>
                     <mat-error *ngIf="hasError('descripcion', 'maxLength')">maxLength 120 caracteres</mat-error>
                 </mat-form-field>

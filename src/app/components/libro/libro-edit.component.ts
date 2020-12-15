@@ -33,7 +33,7 @@ export class LibroEditComponent implements OnInit, OnDestroy {
 
     this.formEdit = formBuilder.group({
       descripcion: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(60)]),      
-      asignatura: new FormControl([Validators.required]),      
+      asignatura: new FormControl('', [Validators.required]),      
       condicion: new FormControl(true),
       stock: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(500)]),            
 
@@ -44,7 +44,7 @@ export class LibroEditComponent implements OnInit, OnDestroy {
     this.cargando = true;
     this.codigoLibro = this.data.codigolibro
 
-    const url = environment.BASE_URL + '/Libro/' + this.codigoLibro;;
+    const url = environment.BASE_URL + '/Libro/getByIdLibro/' + this.codigoLibro;;
     this.subRef$ = this.dataService.get<Libro>(url)
       .subscribe(res => {
         this.cargando = false;
@@ -70,7 +70,7 @@ export class LibroEditComponent implements OnInit, OnDestroy {
       stock: this.formEdit.value.stock,                  
     };
 
-    const url = environment.BASE_URL + '/Libro'
+    const url = environment.BASE_URL + '/Libro/updateLibro'
     this.subRef$ = this.dataService.put<LibroForUpdate>(url,libroForUpdate)
       .subscribe(res => {
         console.log("modificado",res.body);
@@ -91,7 +91,7 @@ export class LibroEditComponent implements OnInit, OnDestroy {
 
 
   ListaAsignatura() {
-    const url = environment.BASE_URL + '/Asignatura';
+    const url = environment.BASE_URL + '/Asignatura/GetAllAsignatura';
     this.subRef$ = this.dataService.get<Asignatura[]>(url)
       .subscribe(res => {
         this.listadoAsignatura = res.body;

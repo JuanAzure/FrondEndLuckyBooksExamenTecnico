@@ -52,7 +52,7 @@ export class AsignaturaAddComponent implements OnInit, OnDestroy {
       condicion: this.formAgregar.value.condicion
     };
 
-    const url = environment.BASE_URL + '/Asignatura';
+    const url = environment.BASE_URL + '/Asignatura/createAsignatura';
     this.subRef$ = this.dataService.post<AsignaturaForCreation>(url, asignaturaForCreation)
       .subscribe(res => {
         this.cargando = false;
